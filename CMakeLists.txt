@@ -1,7 +1,18 @@
-cmake_minimum_required(VERSION 4.1)
-project(multithreaded_rmm_service)
+cmake_minimum_required(VERSION 3.24)
+
+project(rmm_service VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(multithreaded_rmm_service main.cpp
-)
+option(BUILD_TESTS "Build tests" ON)
+
+add_subdirectory(shared)
+add_subdirectory(server)
+add_subdirectory(client)
+
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
