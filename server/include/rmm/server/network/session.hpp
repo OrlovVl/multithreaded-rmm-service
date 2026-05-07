@@ -18,8 +18,7 @@ namespace rmm::server::data {
 
 namespace rmm::server::network {
 
-    class Session final : public std::enable_shared_from_this<Session>
-    {
+    class Session final : public std::enable_shared_from_this<Session> {
     public:
         Session(boost::asio::ip::tcp::socket socket,
                 data::MetricRepository& repository,
@@ -39,8 +38,8 @@ namespace rmm::server::network {
         void doWrite();
         void sendMessage(const rmm::shared::WireMessage& message);
         void handleMessage(const rmm::shared::WireMessage& message);
-        void handleHello(const std::string& payload);
-        void handleAuth(const std::string& payload);
+        void handleLogin(const std::string& payload);
+        void handleRegister(const std::string& payload);
         void handleMetrics(const std::string& payload);
         void handleCommand(const std::string& payload);
         void handleNodesList();
@@ -57,6 +56,7 @@ namespace rmm::server::network {
 
         bool m_stopped{false};
         bool m_isAdmin{false};
+        std::int64_t m_userId{0};
         std::string m_nodeName{"unknown"};
     };
 

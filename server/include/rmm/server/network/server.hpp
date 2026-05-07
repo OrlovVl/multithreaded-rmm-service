@@ -14,8 +14,7 @@ namespace rmm::server::data {
 }
 namespace rmm::server::network {
 
-    class Server final
-    {
+    class Server final {
     public:
         Server(boost::asio::io_context& ioContext,
                std::uint16_t port,
@@ -27,8 +26,10 @@ namespace rmm::server::network {
 
     private:
         void doAccept();
+        void schedulePurge();
 
         boost::asio::ip::tcp::acceptor m_acceptor;
+        boost::asio::steady_timer m_purgeTimer;
         boost::asio::io_context& m_ioContext;
 
         data::MetricRepository& m_repository;

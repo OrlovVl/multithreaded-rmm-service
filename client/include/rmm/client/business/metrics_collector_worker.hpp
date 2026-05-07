@@ -22,11 +22,12 @@ namespace rmm::client::business {
     public slots:
         void startCollecting(int intervalMs);
         void stopCollecting();
-        void collectOnce(); // для принудительного сбора
+        void collectOnce();
 
         signals:
             void snapshotCollected(const rmm::shared::MetricsSnapshot& snapshot);
         void error(const QString& message);
+        void logMessage(const QString& text);   // новый сигнал
 
     private:
         void runCollection();
