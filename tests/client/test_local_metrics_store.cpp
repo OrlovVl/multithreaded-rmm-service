@@ -24,4 +24,3 @@ private slots:
 };
 
 QTEST_MAIN(LocalMetricsStoreTest)
-#include "test_local_metrics_store.moc"

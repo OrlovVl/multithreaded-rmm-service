@@ -34,13 +34,6 @@ std::string makeJson(const ptree& tree)
     return s;
 }
 
-std::string makeJson(const std::string& key, const std::string& value)
-{
-    ptree tree;
-    tree.put(key, value);
-    return makeJson(tree);
-}
-
 } // namespace
 
 Session::Session(boost::asio::ip::tcp::socket socket,
@@ -48,7 +41,7 @@ Session::Session(boost::asio::ip::tcp::socket socket,
                  business::AuthService& authService,
                  business::SessionRegistry& registry)
     : m_socket(std::move(socket))
-    , m_strand(m_socket.get_executor())
+    , m_strand(boost::asio::make_strand(m_socket.get_executor()))
     , m_repository(repository)
     , m_authService(authService)
     , m_registry(registry)

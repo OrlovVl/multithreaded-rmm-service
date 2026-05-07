@@ -18,7 +18,7 @@ namespace rmm::shared {
         return out;
     }
 
-    std::optional<WireMessage> decodeWireMessage(std::string_view line)
+    std::optional<WireMessage> decodeWireMessage(const std::string& line)
     {
         if (line.empty())
         {
@@ -26,14 +26,14 @@ namespace rmm::shared {
         }
 
         const auto spacePos = line.find(' ');
-        if (spacePos == std::string_view::npos)
+        if (spacePos == std::string::npos)
         {
             return std::nullopt;
         }
 
         WireMessage message;
-        message.type = std::string(line.substr(0, spacePos));
-        message.payload = std::string(line.substr(spacePos + 1));
+        message.type = line.substr(0, spacePos);
+        message.payload = line.substr(spacePos + 1);
 
         while (!message.payload.empty() &&
                (message.payload.back() == '\r' || message.payload.back() == '\n'))

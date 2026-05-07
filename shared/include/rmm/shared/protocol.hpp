@@ -2,14 +2,13 @@
 
 #include <optional>
 #include <string>
-#include <string_view>
 
 #include "rmm/shared/models.hpp"
 
 namespace rmm::shared {
 
     std::string encodeWireMessage(const WireMessage& message);
-    std::optional<WireMessage> decodeWireMessage(std::string_view line);
+    std::optional<WireMessage> decodeWireMessage(const std::string& line);
     std::string utcNowIso8601();
 
     namespace MessageType {

@@ -24,6 +24,7 @@ namespace rmm::server::data {
         void insertSnapshot(const rmm::shared::MetricsSnapshot& snapshot, std::string_view rawJson);
         std::vector<std::string> listNodeNames() const;
         std::optional<std::string> latestRawPayloadForNode(const std::string& nodeName) const;
+
         std::optional<rmm::shared::MetricsSnapshot> getLatestSnapshotForNode(const std::string& nodeName) const;
 
     private:

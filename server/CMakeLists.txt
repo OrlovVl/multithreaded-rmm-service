@@ -1,4 +1,4 @@
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system property_tree)
 find_package(SQLite3 REQUIRED)
 
 add_executable(rmm_server
@@ -19,7 +19,9 @@ target_link_libraries(rmm_server
         PRIVATE
         rmm_shared
         Boost::system
+        Boost::property_tree
         SQLite::SQLite3
 )
 
 target_compile_features(rmm_server PRIVATE cxx_std_20)
+target_compile_definitions(rmm_server PRIVATE _WIN32_WINNT=0x0601)

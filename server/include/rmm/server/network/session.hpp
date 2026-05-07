@@ -47,7 +47,7 @@ namespace rmm::server::network {
         void handleGetMetrics(const std::string& payload);
 
         boost::asio::ip::tcp::socket m_socket;
-        boost::asio::strand<boost::asio::io_context::executor_type> m_strand;
+        boost::asio::strand<boost::asio::any_io_executor> m_strand;
         boost::asio::streambuf m_buffer;
         std::deque<std::string> m_outgoing;
 
